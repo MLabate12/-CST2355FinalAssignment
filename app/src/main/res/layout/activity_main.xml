@@ -22,8 +22,11 @@
         tools:layout_editor_absoluteY="332dp" />
 
     <Button
-        android:layout_height=''
-        android:layout_width=''
-        />
+        android:layout_width="225dp"
+        android:layout_height="53dp"
+        app:backgroundTint="@color/black"
+        tools:layout_editor_absoluteX="93dp"
+        tools:layout_editor_absoluteY="445dp"
+        android:text="@string/launch_button"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
