@@ -16,14 +16,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        EditText searchQuery = (EditText)findViewById(R.id.searchQuery);
+        EditText searchText = (EditText)findViewById(R.id.searchQuery);
 
         Button launchButton = findViewById(R.id.launchButton);
         launchButton.setOnClickListener(click -> {
-            String searchTerm = searchQuery.getText().toString();
+            String searchTerm = searchText.getText().toString();
 
             Intent goToSearch = new Intent(MainActivity.this, SearchActivity.class);
-            goToSearch.putExtra("SearchTerm", searchTerm);
+
+            goToSearch.putExtra("SearchTerm", searchTerm.toString().replaceAll(" ", "_"));
             startActivity(goToSearch);
 
         });
