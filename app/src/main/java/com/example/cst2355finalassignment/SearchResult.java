@@ -23,7 +23,7 @@ public class SearchResult implements Serializable {
         return title;
     }
 
-    public void setTitle(String name) {
+    public void setTitle(String title) {
         this.title = title;
     }
 
@@ -31,7 +31,7 @@ public class SearchResult implements Serializable {
         return URL;
     }
 
-    public void setURL(String picture) {
+    public void setURL(String URL) {
         this.URL = URL;
     }
 
@@ -39,7 +39,7 @@ public class SearchResult implements Serializable {
         return sectionName;
     }
 
-    public void setSectionName(String songs) {
+    public void setSectionName(String sectionName) {
         this.sectionName = sectionName;
     }
 

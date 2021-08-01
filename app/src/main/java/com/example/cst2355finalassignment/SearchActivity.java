@@ -23,13 +23,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -46,11 +50,14 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
 
 public class SearchActivity extends AppCompatActivity {
 
     private static final String ACTIVITY_NAME = "SEARCH_ACTIVITY";
-    private List<SearchResult> resultList;
+    private List<String> titleList;
+    private List<String> sectionList;
+    private List<String> URLList;
     private ProgressBar progressBar;
 
     @Override
@@ -59,10 +66,12 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        resultList = new ArrayList<>();
+        titleList = new ArrayList<>();
+        sectionList = new ArrayList<>();
+        URLList = new ArrayList<>();
         Intent fromGuardian = getIntent();
-        String search = fromGuardian.getStringExtra("search");
-        String url = String.format("https://content.guardianapis.com/search?api-key=1fb36b70-1588-4259-b703-2570ea1fac6a&q=", search);
+        String search = fromGuardian.getStringExtra("SearchTerm");
+        String url = String.format("https://content.guardianapis.com/search?api-key=1fb36b70-1588-4259-b703-2570ea1fac6a&q=" + search);
 
         progressBar = findViewById(R.id.progress);
         progressBar.setVisibility(View.VISIBLE);
@@ -113,44 +122,47 @@ public class SearchActivity extends AppCompatActivity {
                 URL url = new URL(args[0]);
                 HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
                 InputStream response = urlConnection.getInputStream();
-                XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
-                factory.setNamespaceAware(false);
-                XmlPullParser xpp = factory.newPullParser();
-                xpp.setInput(response, "UTF-8");
+                BufferedReader reader = new BufferedReader(new InputStreamReader(response, "UTF-8"), 8);
+                StringBuilder sb = new StringBuilder();
 
-                int eventType = xpp.getEventType();
+                String line = null;
+                while ((line = reader.readLine()) != null) {
+                    sb.append(line + "\n");
+                }
+                String result = sb.toString(); //result is the whole string
+                int index = result.indexOf("results");
+                result = "{" + result.substring(index-1);
 
-                while (eventType != XmlPullParser.END_DOCUMENT) {
-                    Log.e(ACTIVITY_NAME, "In While Loop");
-                    if (eventType == XmlPullParser.START_TAG) {
-                        Log.e(ACTIVITY_NAME, "In If Statement");
-                        switch (xpp.getName()) {
-                            case "id":
-                                article = new SearchResult();
-                                break;
-                            case "sectionName":
-                                eventType = xpp.next();
-                                if (eventType == XmlPullParser.TEXT)
-                                    article.setSectionName(xpp.getText());
-                                break;
-                            case "webTitle":
-                                eventType = xpp.next();
-                                if (eventType == XmlPullParser.TEXT)
-                                    article.setTitle(xpp.getText());
-                                break;
-                            case "webURL":
-                                eventType = xpp.next();
-                                if (eventType == XmlPullParser.TEXT)
-                                    article.setURL(xpp.getText());
-                                resultList.add(article);
-                                publishProgress((progress + 5));
-                                break;
+                if (result != null) {
+                    Log.e(ACTIVITY_NAME, "In IF loop");
+                    try {
+                        JSONObject articleString = new JSONObject(result);
+                        JSONArray jArray = articleString.getJSONArray("results");
+
+                        //loop through all results
+                        for (int i = 0; i < jArray.length(); i++) {
+                            Log.e(ACTIVITY_NAME, "In for loop");
+                            Log.e(ACTIVITY_NAME, "Iteration No.: " + i);
+                            JSONObject c = jArray.getJSONObject(i);
+                            article = new SearchResult();
+
+                            article.setSectionName(c.getString("sectionName"));
+                            Log.e(ACTIVITY_NAME, "Section Name: " + article.getSectionName());
+                            article.setTitle(c.getString("webTitle"));
+                            article.setURL(c.getString("webUrl"));
+
+                            titleList.add(article.getTitle());
+                            sectionList.add(article.getSectionName());
+                            URLList.add(article.getURL());
+
+                            publishProgress((progress + 10));
                         }
+                    } catch (final JSONException e) {
+                        Log.e(ACTIVITY_NAME, "Json parsing error: " + e.getMessage());
                     }
-                    eventType = xpp.next();
                 }
 
-            } catch (Exception e) {
+            } catch(Exception e){
                 e.printStackTrace();
             }
             publishProgress(100);
@@ -164,12 +176,60 @@ public class SearchActivity extends AppCompatActivity {
         @Override
         public void onPostExecute(String fromDoInBackground) {
             Log.e(ACTIVITY_NAME, "In onPostExecute");
+            super.onPostExecute(fromDoInBackground);
             progressBar.setVisibility(View.INVISIBLE);
-            if (resultList.isEmpty()) {
+            if (titleList.isEmpty()) {
                 TextView text = findViewById(R.id.notFound);
                 text.setVisibility(View.VISIBLE);
+            } else {
+                ListView list = findViewById(R.id.resultsView);
+                list.setAdapter(new ResultListAdapter());
             }
 
+        }
+    }
+
+    private class ResultListAdapter extends BaseAdapter {
+
+        public int getCount() {
+            return titleList.size();
+        }
+
+        public Object getItem(int position) {
+            return titleList.get(position);
+        }
+        public Object getTitleList(int position) {
+            return titleList.get(position);
+        }
+        public Object getSection(int position) {
+            return sectionList.get(position);
+        }
+        public Object getURLList(int position) {
+            return URLList.get(position);
+        }
+
+        public long getItemId(int position) {
+            return position;
+        }
+
+        public View getView(int position, View old, ViewGroup parent) {
+            LayoutInflater inflater = getLayoutInflater();
+            View newView;
+            newView = inflater.inflate(R.layout.row_layout, parent, false);
+
+            TextView titleView;
+            titleView = newView.findViewById(R.id.rowTitle);
+            titleView.setText(getTitleList(position).toString());
+
+            TextView sectionView;
+            sectionView = newView.findViewById(R.id.rowSection);
+            sectionView.setText(getSection(position).toString());
+
+            TextView URLView;
+            URLView = newView.findViewById(R.id.rowURL);
+            URLView.setText(getURLList(position).toString());
+
+            return newView;
         }
     }
 
