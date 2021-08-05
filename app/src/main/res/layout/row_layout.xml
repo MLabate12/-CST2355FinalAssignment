@@ -10,20 +10,6 @@
         android:layout_height="40dp"
         android:gravity="left"
         android:textAlignment="gravity" />
-    <TextView
-        android:id="@+id/rowSection"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:gravity="left"
-        android:layout_below="@id/rowTitle"
-        android:textAlignment="gravity" />
-    <TextView
-        android:id="@+id/rowURL"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:gravity="left"
-        android:layout_below="@id/rowSection"
-        android:textAlignment="gravity" />
 
 </RelativeLayout>
 

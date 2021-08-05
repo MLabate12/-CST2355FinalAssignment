@@ -55,9 +55,7 @@ import java.util.ListIterator;
 public class SearchActivity extends AppCompatActivity {
 
     private static final String ACTIVITY_NAME = "SEARCH_ACTIVITY";
-    private List<String> titleList;
-    private List<String> sectionList;
-    private List<String> URLList;
+    private List<SearchResult> titleList;
     private ProgressBar progressBar;
 
     @Override
@@ -67,8 +65,6 @@ public class SearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search);
 
         titleList = new ArrayList<>();
-        sectionList = new ArrayList<>();
-        URLList = new ArrayList<>();
         Intent fromGuardian = getIntent();
         String search = fromGuardian.getStringExtra("SearchTerm");
         String url = String.format("https://content.guardianapis.com/search?api-key=1fb36b70-1588-4259-b703-2570ea1fac6a&q=" + search);
@@ -119,6 +115,7 @@ public class SearchActivity extends AppCompatActivity {
             Log.e(ACTIVITY_NAME, "In doInBackground");
             int progress = 0;
             try {
+                //start connection
                 URL url = new URL(args[0]);
                 HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
                 InputStream response = urlConnection.getInputStream();
@@ -129,33 +126,28 @@ public class SearchActivity extends AppCompatActivity {
                 while ((line = reader.readLine()) != null) {
                     sb.append(line + "\n");
                 }
-                String result = sb.toString(); //result is the whole string
+
+                String result = sb.toString(); //result into a string
                 int index = result.indexOf("results");
                 result = "{" + result.substring(index-1);
 
                 if (result != null) {
-                    Log.e(ACTIVITY_NAME, "In IF loop");
                     try {
                         JSONObject articleString = new JSONObject(result);
                         JSONArray jArray = articleString.getJSONArray("results");
 
                         //loop through all results
                         for (int i = 0; i < jArray.length(); i++) {
-                            Log.e(ACTIVITY_NAME, "In for loop");
-                            Log.e(ACTIVITY_NAME, "Iteration No.: " + i);
                             JSONObject c = jArray.getJSONObject(i);
-                            article = new SearchResult();
+                            article = new SearchResult(); //set new article
 
                             article.setSectionName(c.getString("sectionName"));
-                            Log.e(ACTIVITY_NAME, "Section Name: " + article.getSectionName());
                             article.setTitle(c.getString("webTitle"));
                             article.setURL(c.getString("webUrl"));
 
-                            titleList.add(article.getTitle());
-                            sectionList.add(article.getSectionName());
-                            URLList.add(article.getURL());
+                            titleList.add(article);
 
-                            publishProgress((progress + 10));
+                            publishProgress((progress + 25)); //increase progress bar
                         }
                     } catch (final JSONException e) {
                         Log.e(ACTIVITY_NAME, "Json parsing error: " + e.getMessage());
@@ -177,15 +169,21 @@ public class SearchActivity extends AppCompatActivity {
         public void onPostExecute(String fromDoInBackground) {
             Log.e(ACTIVITY_NAME, "In onPostExecute");
             super.onPostExecute(fromDoInBackground);
+            ListView list = findViewById(R.id.resultsView);
             progressBar.setVisibility(View.INVISIBLE);
+
             if (titleList.isEmpty()) {
                 TextView text = findViewById(R.id.notFound);
                 text.setVisibility(View.VISIBLE);
             } else {
-                ListView list = findViewById(R.id.resultsView);
                 list.setAdapter(new ResultListAdapter());
             }
 
+            list.setOnItemClickListener((parent, view, position, id) -> {
+                Intent gotoDetails = new Intent(SearchActivity.this, SearchResultsActivity.class);
+                gotoDetails.putExtra("article", titleList.get(position));
+                startActivity(gotoDetails);
+            });
         }
     }
 
@@ -201,13 +199,6 @@ public class SearchActivity extends AppCompatActivity {
         public Object getTitleList(int position) {
             return titleList.get(position);
         }
-        public Object getSection(int position) {
-            return sectionList.get(position);
-        }
-        public Object getURLList(int position) {
-            return URLList.get(position);
-        }
-
         public long getItemId(int position) {
             return position;
         }
@@ -217,17 +208,10 @@ public class SearchActivity extends AppCompatActivity {
             View newView;
             newView = inflater.inflate(R.layout.row_layout, parent, false);
 
+            //display article titles
             TextView titleView;
             titleView = newView.findViewById(R.id.rowTitle);
             titleView.setText(getTitleList(position).toString());
-
-            TextView sectionView;
-            sectionView = newView.findViewById(R.id.rowSection);
-            sectionView.setText(getSection(position).toString());
-
-            TextView URLView;
-            URLView = newView.findViewById(R.id.rowURL);
-            URLView.setText(getURLList(position).toString());
 
             return newView;
         }
