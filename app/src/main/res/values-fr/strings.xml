@@ -3,4 +3,6 @@
     <string name="launch_button">"Nabez" Mes Nouvelles!</string>
     <string name="searchTerm">Recherché: </string>
     <string name="searchQuery">Cherche Ici</string>
+    <string name="toast_1">Récupérer vos résultats....</string>
+    <string name="snackbar">Your results have been nabbed!.</string>
 </resources>

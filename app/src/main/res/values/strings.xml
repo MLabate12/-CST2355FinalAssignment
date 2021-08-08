@@ -5,4 +5,15 @@
     <string name="searchQuery">Search Here</string>
     <string name="results_notfound">No results founds, please return and check your search term</string>
     <string name="results_title">Search Results</string>
+    <string name="toast_1">Nabbing your results....</string>
+    <string name="snackbar">Your results have been nabbed!.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+
+
+        <string-array name="updates_array">
+            <item>Shuttle Badminton</item>
+            <item>Tennis</item>
+            <item>FootBall</item>
+        </string-array>
+
 </resources>

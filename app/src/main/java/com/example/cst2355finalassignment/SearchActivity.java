@@ -14,6 +14,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -29,6 +30,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONObject;
 import org.xmlpull.v1.XmlPullParser;
@@ -52,6 +54,7 @@ public class SearchActivity extends AppCompatActivity {
     private static final String ACTIVITY_NAME = "SEARCH_ACTIVITY";
     private List<SearchResult> resultList;
     private ProgressBar progressBar;
+    private TextView articleResult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,9 +67,11 @@ public class SearchActivity extends AppCompatActivity {
         String search = fromGuardian.getStringExtra("search");
         String url = String.format("https://content.guardianapis.com/search?api-key=1fb36b70-1588-4259-b703-2570ea1fac6a&q=", search);
 
+
+
         progressBar = findViewById(R.id.progress);
         progressBar.setVisibility(View.VISIBLE);
-
+        articleResult = findViewById(R.id.notFound);
         SearchQuery req = new SearchQuery();
         req.execute(url);
 
@@ -104,6 +109,7 @@ public class SearchActivity extends AppCompatActivity {
 
     class SearchQuery extends AsyncTask<String, Integer, String> {
         SearchResult article;
+        private String articleResult = null;
 
         @Override
         protected String doInBackground(String... args) {
@@ -137,6 +143,7 @@ public class SearchActivity extends AppCompatActivity {
                                 eventType = xpp.next();
                                 if (eventType == XmlPullParser.TEXT)
                                     article.setTitle(xpp.getText());
+                                    articleResult = xpp.getAttributeValue(null,"webTitle");
                                 break;
                             case "webURL":
                                 eventType = xpp.next();
@@ -165,12 +172,16 @@ public class SearchActivity extends AppCompatActivity {
         public void onPostExecute(String fromDoInBackground) {
             Log.e(ACTIVITY_NAME, "In onPostExecute");
             progressBar.setVisibility(View.INVISIBLE);
+
             if (resultList.isEmpty()) {
                 TextView text = findViewById(R.id.notFound);
+                text.setText("result: "+articleResult);
                 text.setVisibility(View.VISIBLE);
             }
 
         }
+
+
     }
 
 
