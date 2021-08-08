@@ -5,4 +5,5 @@
     <string name="searchQuery">Search Here</string>
     <string name="results_notfound">No results founds, please return and check your search term</string>
     <string name="results_title">Search Results</string>
+    <string name="toast_1">Nabbing your results....</string>
 </resources>
