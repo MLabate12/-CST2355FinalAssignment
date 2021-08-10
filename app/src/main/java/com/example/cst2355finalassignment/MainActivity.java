@@ -1,16 +1,20 @@
 package com.example.cst2355finalassignment;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,6 +32,31 @@ public class MainActivity extends AppCompatActivity {
 
         String searchToast = getString(R.string.toast_1);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+
+        // using toolbar as ActionBar
+        setSupportActionBar(toolbar);
+
+
+        // Display application icon in the toolbar
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+
+        // assigning ID of textView2 to a variable
+        ImageView menuIcon = (ImageView) findViewById(R.id.imageView2);
+
+
+        // "on click" operations to be performed
+        menuIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+
+            // incrementing the value of textView
+            public void onClick( View view ) {
+                System.out.println("hello");
+            }
+        });
+
 
 
         search = findViewById(R.id.searchQuery);
@@ -39,6 +68,8 @@ public class MainActivity extends AppCompatActivity {
         Fragment fragment = new UpdateFragment();
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_frame, fragment, fragment.getClass().getSimpleName()).addToBackStack(null).commit();
+
+
 
         Button launchButton = findViewById(R.id.launchButton);
         launchButton.setOnClickListener(click -> {
@@ -52,6 +83,8 @@ public class MainActivity extends AppCompatActivity {
 
         });
     }
+
+
 
     @Override
     protected void onPause(){
