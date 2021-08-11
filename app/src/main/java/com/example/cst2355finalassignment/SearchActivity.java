@@ -186,33 +186,33 @@ public class SearchActivity extends AppCompatActivity {
                 list.setAdapter(new ResultListAdapter());
             }
 
+            list.setOnItemLongClickListener((parent, view, position, id) -> {
+                AlertDialog alertDialog = new AlertDialog.Builder(SearchActivity.this).create();
+                alertDialog.setTitle("Favourite Article");
+                alertDialog.setMessage("Add article to favourites?");
+                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "YES",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                alertDialog.show();
+
+
+                return false;
+            });
+
             list.setOnItemClickListener((parent, view, position, id) -> {
                 Intent gotoDetails = new Intent(SearchActivity.this, SearchResultsActivity.class);
                 gotoDetails.putExtra("article", titleList.get(position));
                 startActivity(gotoDetails);
+
+
             });
 
-            /*alert.setMessage("Write your message here.");
-            alert.setCancelable(true);
 
-            alert.setPositiveButton(
-                    "Yes",
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            dialog.cancel();
-                        }
-                    });
 
-            alert.setNegativeButton(
-                    "No",
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            dialog.cancel();
-                        }
-                    });
 
-            AlertDialog alert11 = alert.create();
-            alert11.show();*/
 
 
         }
