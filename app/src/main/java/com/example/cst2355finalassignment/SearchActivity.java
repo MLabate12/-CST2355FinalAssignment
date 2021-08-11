@@ -8,6 +8,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -52,11 +53,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
+import static androidx.appcompat.app.AlertDialog.*;
+
 public class SearchActivity extends AppCompatActivity {
 
     private static final String ACTIVITY_NAME = "SEARCH_ACTIVITY";
     private List<SearchResult> titleList;
     private ProgressBar progressBar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +78,8 @@ public class SearchActivity extends AppCompatActivity {
 
         SearchQuery req = new SearchQuery();
         req.execute(url);
+
+
 
     }
 
@@ -129,7 +135,7 @@ public class SearchActivity extends AppCompatActivity {
 
                 String result = sb.toString(); //result into a string
                 int index = result.indexOf("results");
-                result = "{" + result.substring(index-1);
+                result = "{" + result.substring(index - 1);
 
                 if (result != null) {
                     try {
@@ -154,12 +160,13 @@ public class SearchActivity extends AppCompatActivity {
                     }
                 }
 
-            } catch(Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
             publishProgress(100);
             return "Done";
         }
+
         @Override
         public void onProgressUpdate(Integer... args) {
             progressBar.setProgress(args[0]);
@@ -171,7 +178,7 @@ public class SearchActivity extends AppCompatActivity {
             super.onPostExecute(fromDoInBackground);
             ListView list = findViewById(R.id.resultsView);
             progressBar.setVisibility(View.INVISIBLE);
-
+            /*AlertDialog.Builder alert = new AlertDialog.Builder(this);*/
             if (titleList.isEmpty()) {
                 TextView text = findViewById(R.id.notFound);
                 text.setVisibility(View.VISIBLE);
@@ -184,38 +191,69 @@ public class SearchActivity extends AppCompatActivity {
                 gotoDetails.putExtra("article", titleList.get(position));
                 startActivity(gotoDetails);
             });
+
+            /*alert.setMessage("Write your message here.");
+            alert.setCancelable(true);
+
+            alert.setPositiveButton(
+                    "Yes",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    });
+
+            alert.setNegativeButton(
+                    "No",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    });
+
+            AlertDialog alert11 = alert.create();
+            alert11.show();*/
+
+
         }
+
+
+        }
+
+
+
+
+        private class ResultListAdapter extends BaseAdapter {
+
+            public int getCount() {
+                return titleList.size();
+            }
+
+            public Object getItem(int position) {
+                return titleList.get(position);
+            }
+
+            public Object getTitleList(int position) {
+                return titleList.get(position);
+            }
+
+            public long getItemId(int position) {
+                return position;
+            }
+
+            public View getView(int position, View old, ViewGroup parent) {
+                LayoutInflater inflater = getLayoutInflater();
+                View newView;
+                newView = inflater.inflate(R.layout.row_layout, parent, false);
+
+                //display article titles
+                TextView titleView;
+                titleView = newView.findViewById(R.id.rowTitle);
+                titleView.setText(getTitleList(position).toString());
+
+                return newView;
+            }
+        }
+
+
     }
-
-    private class ResultListAdapter extends BaseAdapter {
-
-        public int getCount() {
-            return titleList.size();
-        }
-
-        public Object getItem(int position) {
-            return titleList.get(position);
-        }
-        public Object getTitleList(int position) {
-            return titleList.get(position);
-        }
-        public long getItemId(int position) {
-            return position;
-        }
-
-        public View getView(int position, View old, ViewGroup parent) {
-            LayoutInflater inflater = getLayoutInflater();
-            View newView;
-            newView = inflater.inflate(R.layout.row_layout, parent, false);
-
-            //display article titles
-            TextView titleView;
-            titleView = newView.findViewById(R.id.rowTitle);
-            titleView.setText(getTitleList(position).toString());
-
-            return newView;
-        }
-    }
-
-
-}
