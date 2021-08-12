@@ -10,6 +10,9 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -187,10 +190,35 @@ public class SearchActivity extends AppCompatActivity {
             }
 
             list.setOnItemLongClickListener((parent, view, position, id) -> {
+
+                TextView resultsTitle = findViewById(R.id.resultsTitle);
+                TextView resultsURL = findViewById(R.id.articleURL);
                 AlertDialog alertDialog = new AlertDialog.Builder(SearchActivity.this).create();
                 alertDialog.setTitle("Favourite Article");
                 alertDialog.setMessage("Add article to favourites?");
-                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "YES",
+                alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "YES",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                String title = resultsTitle.getText().toString();
+                                String URL = "hello";
+
+                               try{
+                                    SQLiteDatabase nabberDB = openOrCreateDatabase("nabberDB",MODE_PRIVATE,null);
+                                    nabberDB.execSQL("CREATE TABLE IF NOT EXISTS favorites(Title, Link);");
+                                    nabberDB.execSQL("INSERT INTO favorites VALUES('2','2');");
+                                    System.out.println("Added to DB");
+                                }
+                                catch(SQLException e){
+                                    System.out.println("DB Error, please see StackTrace");
+                                    e.printStackTrace();
+                                }
+
+                            }
+                        });
+
+
+
+                alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "NO",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.dismiss();
@@ -199,7 +227,7 @@ public class SearchActivity extends AppCompatActivity {
                 alertDialog.show();
 
 
-                return false;
+                return true;
             });
 
             list.setOnItemClickListener((parent, view, position, id) -> {
