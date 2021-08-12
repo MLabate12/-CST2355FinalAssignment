@@ -58,20 +58,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
 
-        // assigning ID of textView2 to a variable
-        ImageView menuIcon = (ImageView) findViewById(R.id.imageView2);
-
-
-        // "on click" operations to be performed
-        menuIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-
-            // incrementing the value of textView
-            public void onClick( View view ) {
-                System.out.println("hello");
-            }
-        });
-
         search = findViewById(R.id.searchQuery);
 
         preferences = getSharedPreferences("Search",Context.MODE_PRIVATE);
@@ -81,8 +67,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Fragment fragment = new UpdateFragment();
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_frame, fragment, fragment.getClass().getSimpleName()).addToBackStack(null).commit();
-
-
 
         Button launchButton = findViewById(R.id.launchButton);
         launchButton.setOnClickListener(click -> {
@@ -98,8 +82,35 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
-    public boolean onNavigationItemSelected( MenuItem item) {
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu items for use in the action bar
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
 
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        String message = null;
+
+        switch(item.getItemId())
+        {
+            case R.id.homePage:
+                Intent goToHome = new Intent(MainActivity.this, MainActivity.class);
+                startActivity(goToHome);
+                break;
+            /*case R.id.favePage:
+                Intent goToWeather = new Intent(MainActivity.this, **FAVOURITES LIST GOES HERE**.class);
+                startActivity(goToWeather);
+                break;*/
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
         String message = null;
 
         switch(item.getItemId())
