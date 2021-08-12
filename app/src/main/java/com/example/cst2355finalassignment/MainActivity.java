@@ -6,17 +6,24 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
-public class MainActivity extends AppCompatActivity {
+import com.google.android.material.navigation.NavigationView;
+
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final String ACTIVITY_NAME = "MAIN_ACTIVITY";
     SharedPreferences preferences;
@@ -34,10 +41,18 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
-
         // using toolbar as ActionBar
         setSupportActionBar(toolbar);
 
+        //start Navigation Bar
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,
+                drawer, toolbar, R.string.open, R.string.close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
 
         // Display application icon in the toolbar
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -56,8 +71,6 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println("hello");
             }
         });
-
-
 
         search = findViewById(R.id.searchQuery);
 
@@ -84,7 +97,28 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public boolean onNavigationItemSelected( MenuItem item) {
 
+        String message = null;
+
+        switch(item.getItemId())
+        {
+            case R.id.homePage:
+                Intent goToHome = new Intent(MainActivity.this, MainActivity.class);
+                startActivity(goToHome);
+                break;
+            /*case R.id.favePage:
+                Intent goToWeather = new Intent(MainActivity.this, **FAVOURITES LIST GOES HERE**.class);
+                startActivity(goToWeather);
+                break;*/
+        }
+
+        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+        drawerLayout.closeDrawer(GravityCompat.START);
+
+        return false;
+    }
 
     @Override
     protected void onPause(){

@@ -3,5 +3,11 @@
     <string name="launch_button">"Nabez" Mes Nouvelles!</string>
     <string name="searchTerm">Recherché: </string>
     <string name="searchQuery">Cherche Ici</string>
+    <string name="results_notfound">Aucun résultat trouvé, veuillez revenir et vérifier votre terme de recherche</string>
+    <string name="results_title">Résultats de recherche</string>
     <string name="toast_1">Récupérer vos résultats....</string>
+    <string name="homeNav">Allez Home.</string>
+    <string name="faveNav">Aller aux Favoris</string>
+    <string name="open">Ouvrir</string>
+    <string name="close">Fermer</string>
 </resources>
