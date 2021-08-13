@@ -8,13 +8,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,21 +22,16 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.navigation.NavigationView;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class HelpActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private static final String ACTIVITY_NAME = "MAIN_ACTIVITY";
+    private static final String ACTIVITY_NAME = "HELP_ACTIVITY";
     SharedPreferences preferences;
-    EditText search;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.e(ACTIVITY_NAME, "In onCreate");
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        EditText searchText = (EditText)findViewById(R.id.searchQuery);
-
-        String searchToast = getString(R.string.toast_1);
+        setContentView(R.layout.activity_help);
 
         //This gets the toolbar from the layout:
         Toolbar tBar = findViewById(R.id.toolbar);
@@ -60,26 +52,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Display application icon in the toolbar
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
-
-        search = findViewById(R.id.searchQuery);
-
-        preferences = getSharedPreferences("Search",Context.MODE_PRIVATE);
-        String searchQuery = preferences.getString("Search","");
-        search.setText(searchQuery);
-
-        Fragment fragment = new UpdateFragment();
-
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_frame, fragment, fragment.getClass().getSimpleName()).addToBackStack(null).commit();
-
-        Button launchButton = findViewById(R.id.launchButton);
-        launchButton.setOnClickListener(click -> {
-            Toast toast= Toast.makeText(getApplicationContext(),searchToast,Toast.LENGTH_SHORT);
-            toast.show();
-            String searchTerm = searchText.getText().toString();
-            Intent goToSearch = new Intent(MainActivity.this, SearchActivity.class);
-            goToSearch.putExtra("SearchTerm", searchTerm.toString().replaceAll(" ", "_"));
-            startActivity(goToSearch);
-        });
     }
 
     @Override
@@ -93,28 +65,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
-        switch(item.getItemId()) {
+        String message = null;
+        switch(item.getItemId())
+        {
             //what to do when the menu item is selected:
             case R.id.help_item:
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-                alertDialogBuilder.setTitle("Help Options")
-                    //What is the message:
-                    .setMessage("Would you like to go to the main Help page?")
-
-                    //what the Yes button does:
-                    .setPositiveButton("Yes", (click, arg) -> {
-                        Intent goToHelp = new Intent(MainActivity.this, HelpActivity.class);
-                        startActivity(goToHelp);
-                    })
-                    //What the No button does:
-                    .setNegativeButton("No", (click, arg) -> { })
-
-                    //Show the dialog
-                    .create().show();
+                message = "HELP GOES HERE";
                 break;
         }
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
         return true;
+
     }
 
     @Override
@@ -124,11 +85,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch(item.getItemId())
         {
             case R.id.homePage:
-                Intent goToHome = new Intent(MainActivity.this, MainActivity.class);
+                Intent goToHome = new Intent(HelpActivity.this, HelpActivity.class);
                 startActivity(goToHome);
                 break;
             case R.id.favePage:
-                Intent goToFave = new Intent(MainActivity.this, FavouriteActivity.class);
+                Intent goToFave = new Intent(HelpActivity.this, FavouriteActivity.class);
                 startActivity(goToFave);
                 break;
         }
@@ -137,18 +98,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout.closeDrawer(GravityCompat.START);
 
         return false;
-    }
-
-    @Override
-    protected void onPause(){
-        super.onPause();
-        SharedPreferences(search.getText().toString());
-    }
-
-    private void SharedPreferences(String search){
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putString("Search",search);
-        editor.commit();
     }
 
 }

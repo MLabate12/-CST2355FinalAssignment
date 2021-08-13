@@ -59,7 +59,7 @@ import java.util.ListIterator;
 
 import static androidx.appcompat.app.AlertDialog.*;
 
-public class SearchActivity extends AppCompatActivity {
+public class SearchActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final String ACTIVITY_NAME = "SEARCH_ACTIVITY";
     private List<SearchResult> titleList;
@@ -71,6 +71,26 @@ public class SearchActivity extends AppCompatActivity {
         Log.e(ACTIVITY_NAME, "In onCreate");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+
+        //This gets the toolbar from the layout:
+        Toolbar tBar = findViewById(R.id.toolbar);
+
+        //This loads the toolbar, which calls onCreateOptionsMenu below:
+        setSupportActionBar(tBar);
+
+        //start Navigation Bar
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,
+                drawer, tBar, R.string.open, R.string.close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        // Display application icon in the toolbar
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
 
         titleList = new ArrayList<>();
         Intent fromGuardian = getIntent();
@@ -229,4 +249,48 @@ public class SearchActivity extends AppCompatActivity {
             }
         }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu items for use in the action bar
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+
+        return true;
     }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        String message = null;
+        switch(item.getItemId())
+        {
+            //what to do when the menu item is selected:
+            case R.id.help_item:
+                message = "HELP GOES HERE";
+                break;
+        }
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+        return true;
+
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        String message = null;
+
+        switch(item.getItemId())
+        {
+            case R.id.homePage:
+                Intent goToHome = new Intent(SearchActivity.this, HelpActivity.class);
+                startActivity(goToHome);
+                break;
+            case R.id.favePage:
+                Intent goToFave = new Intent(SearchActivity.this, FavouriteActivity.class);
+                startActivity(goToFave);
+                break;
+        }
+
+        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+        drawerLayout.closeDrawer(GravityCompat.START);
+
+        return false;
+    }
+}

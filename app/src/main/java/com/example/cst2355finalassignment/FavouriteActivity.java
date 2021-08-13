@@ -9,18 +9,25 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toolbar;
+import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONArray;
@@ -38,7 +45,7 @@ import java.util.List;
 import static androidx.appcompat.app.AlertDialog.Builder;
 import static androidx.appcompat.app.AlertDialog.OnClickListener;
 
-public class FavouriteActivity extends AppCompatActivity {
+public class FavouriteActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final String ACTIVITY_NAME = "FAVOURITE_ACTIVITY";
     private List<SearchResult> faveList = new ArrayList<>();
@@ -52,6 +59,25 @@ public class FavouriteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favourite);
 
+        //This gets the toolbar from the layout:
+        Toolbar tBar = findViewById(R.id.toolbar);
+
+        //This loads the toolbar, which calls onCreateOptionsMenu below:
+        setSupportActionBar(tBar);
+
+        //start Navigation Bar
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,
+                drawer, tBar, R.string.open, R.string.close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        // Display application icon in the toolbar
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
         nabberDB = new NabberDB(this);
         nabberDB.getWritableDatabase();
         faveList = nabberDB.getAll();
@@ -127,6 +153,52 @@ public class FavouriteActivity extends AppCompatActivity {
             });
         }
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu items for use in the action bar
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        String message = null;
+        switch(item.getItemId())
+        {
+            //what to do when the menu item is selected:
+            case R.id.help_item:
+                message = "HELP GOES HERE";
+                break;
+        }
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+        return true;
+
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        String message = null;
+
+        switch(item.getItemId())
+        {
+            case R.id.homePage:
+                Intent goToHome = new Intent(FavouriteActivity.this, HelpActivity.class);
+                startActivity(goToHome);
+                break;
+            case R.id.favePage:
+                Intent goToFave = new Intent(FavouriteActivity.this, FavouriteActivity.class);
+                startActivity(goToFave);
+                break;
+        }
+
+        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+        drawerLayout.closeDrawer(GravityCompat.START);
+
+        return false;
     }
 
 }

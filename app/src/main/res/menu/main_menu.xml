@@ -2,20 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item
-        android:id="@+id/navDrawer"
-        android:icon="@drawable/menu"
-        android:orderInCategory="250"
-        android:title="@string/help"
-        android:background="@drawable/newspaper_background"
-        app:showAsAction="always" />
 
-    <item
-        android:id="@+id/help"
+    <item android:id="@+id/help_item"
         android:icon="@drawable/question_mark"
-        android:orderInCategory="250"
         android:title="@string/help"
-        android:background="@drawable/newspaper_background"
-        app:showAsAction="always" />
+        android:orderInCategory="100"
+        app:showAsAction="always"/>
+
 
 </menu>
