@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -62,13 +63,15 @@ public class SearchResultsActivity extends AppCompatActivity {
         article = (SearchResult) fromSearch.getSerializableExtra("article");
 
         TextView title = findViewById(R.id.articleTitle);
-        title.setText(String.format(article.getTitle()));
+        title.setText("Article Title: " + String.format(article.getTitle()));
+        //title.setBackgroundColor(Color.BLACK);
+        //title.setBackgroundColor(Color.WHITE);
 
         TextView sectionName = findViewById(R.id.articleSectionName);
-        sectionName.setText(String.format(article.getSectionName()));
+        sectionName.setText("Section Name: " + String.format(article.getSectionName()));
 
         TextView URL = findViewById(R.id.articleURL);
-        URL.setText(String.format(article.getURL()));
+        URL.setText("URL: " + String.format(article.getURL()));
 
         nabberDB = new NabberDB(this);
         nabberDB.getWritableDatabase();

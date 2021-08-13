@@ -5,6 +5,7 @@
     <string name="searchQuery">Search Here</string>
     <string name="results_notfound">No results founds, please return and check your search term</string>
     <string name="results_title">Search Results</string>
+    <string name="details_title">Search Details</string>
     <string name="toast_1">Nabbing your results....</string>
     <string name="toast_2">Added to favourites.</string>
     <string name="toast_3">Removed from favourites.</string>

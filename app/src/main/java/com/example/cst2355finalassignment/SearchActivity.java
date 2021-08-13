@@ -15,6 +15,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -220,6 +221,8 @@ public class SearchActivity extends AppCompatActivity {
                 //display article titles
                 TextView titleView;
                 titleView = newView.findViewById(R.id.rowTitle);
+                newView.setBackgroundColor(Color.BLACK);
+                titleView.setTextColor(Color.WHITE);
                 titleView.setText(getTitleList(position).toString());
 
                 return newView;

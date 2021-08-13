@@ -5,6 +5,7 @@
     <string name="searchQuery">Cherche Ici</string>
     <string name="results_notfound">Aucun résultat trouvé, veuillez revenir et vérifier votre terme de recherche</string>
     <string name="results_title">Résultats de recherche</string>
+    <string name="details_title">Détails de la recherche</string>
     <string name="toast_1">Récupérer vos résultats....</string>
     <string name="toast_2">Ajouter aux Favourites.</string>
     <string name="toast_3">Supprimer par favourites.</string>
