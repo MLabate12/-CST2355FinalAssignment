@@ -100,10 +100,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Intent goToHome = new Intent(MainActivity.this, MainActivity.class);
                 startActivity(goToHome);
                 break;
-            /*case R.id.favePage:
-                Intent goToWeather = new Intent(MainActivity.this, **FAVOURITES LIST GOES HERE**.class);
-                startActivity(goToWeather);
-                break;*/
+            case R.id.favePage:
+                Intent goToFave = new Intent(MainActivity.this, FavouriteActivity.class);
+                startActivity(goToFave);
+                break;
         }
 
         return false;
@@ -119,10 +119,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Intent goToHome = new Intent(MainActivity.this, MainActivity.class);
                 startActivity(goToHome);
                 break;
-            /*case R.id.favePage:
-                Intent goToWeather = new Intent(MainActivity.this, **FAVOURITES LIST GOES HERE**.class);
-                startActivity(goToWeather);
-                break;*/
+            case R.id.favePage:
+                Intent goToFave = new Intent(MainActivity.this, FavouriteActivity.class);
+                startActivity(goToFave);
+                break;
         }
 
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);

@@ -46,14 +46,14 @@
                 android:textSize="24dp" />
 
                 <Button
-                    android:id="@+id/faveButton"
+                    android:id="@+id/faveRemoveButton"
                     android:layout_width="225dp"
                     android:layout_height="53dp"
                     android:layout_marginTop="67dp"
                     android:layout_gravity="center_horizontal"
                     android:textColor= "@color/white"
                     android:layout_below="@id/articleURL"
-                    android:text="@string/faveButton"
+                    android:text="@string/faveRemoveButton"
                     app:backgroundTint="@color/black" />
 
         </RelativeLayout>

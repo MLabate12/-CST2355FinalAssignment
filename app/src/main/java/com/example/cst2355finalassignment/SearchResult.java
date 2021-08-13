@@ -6,8 +6,16 @@ public class SearchResult implements Serializable {
     private String title;
     private String URL;
     private String sectionName;
+    private long id;
 
     public static final long serialVersionUID = 1L;
+
+    public SearchResult(long id, String title, String URL, String sectionName) {
+        this.title = title;
+        this.URL = URL;
+        this.sectionName = sectionName;
+        this.id = id;
+    }
 
     public SearchResult(String title, String URL, String sectionName) {
         this.title = title;
@@ -43,11 +51,14 @@ public class SearchResult implements Serializable {
         this.sectionName = sectionName;
     }
 
+    public void setId(long id) { this.id = id; }
+
+    public long getId() { return id; }
+
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof SearchResult)
             return super.equals(obj) || getTitle().equals(((SearchResult) obj).getTitle());
-
         return false;
     }
 

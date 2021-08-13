@@ -6,8 +6,16 @@
     <string name="results_notfound">Aucun résultat trouvé, veuillez revenir et vérifier votre terme de recherche</string>
     <string name="results_title">Résultats de recherche</string>
     <string name="toast_1">Récupérer vos résultats....</string>
+    <string name="toast_2">Ajouter aux Favourites.</string>
+    <string name="toast_3">Supprimer par favourites.</string>
     <string name="homeNav">Allez Home.</string>
     <string name="faveNav">Aller aux Favoris</string>
     <string name="open">Ouvrir</string>
     <string name="close">Fermer</string>
+    <string name="favourite_header">Votre Favourites</string>
+    <string name="faveButton">Ajouter aux Favourites</string>
+    <string name="favourite_deleteheader">Supprimer le favori?</string>
+    <string name="favourite_deletemsg">Supprimer</string>
+    <string name="favourite_deletesuccess">Supprimé avec succès des favoris</string>
+    <string name="faveRemoveButton">Supprimer le Favori</string>
 </resources>

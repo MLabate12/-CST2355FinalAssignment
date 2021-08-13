@@ -12,7 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CST2355FinalAssignment">
         <activity android:name=".SearchActivity"></activity>
+        <activity android:name=".FavouriteActivity"></activity>
         <activity android:name=".SearchResultsActivity"></activity>
+        <activity android:name=".FavouriteResultsActivity"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

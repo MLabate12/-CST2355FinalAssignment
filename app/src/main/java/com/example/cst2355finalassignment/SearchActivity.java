@@ -81,9 +81,6 @@ public class SearchActivity extends AppCompatActivity {
 
         SearchQuery req = new SearchQuery();
         req.execute(url);
-
-
-
     }
 
     @Override
@@ -181,7 +178,7 @@ public class SearchActivity extends AppCompatActivity {
             super.onPostExecute(fromDoInBackground);
             ListView list = findViewById(R.id.resultsView);
             progressBar.setVisibility(View.INVISIBLE);
-            /*AlertDialog.Builder alert = new AlertDialog.Builder(this);*/
+
             if (titleList.isEmpty()) {
                 TextView text = findViewById(R.id.notFound);
                 text.setVisibility(View.VISIBLE);
@@ -189,67 +186,13 @@ public class SearchActivity extends AppCompatActivity {
                 list.setAdapter(new ResultListAdapter());
             }
 
-            list.setOnItemLongClickListener((parent, view, position, id) -> {
-
-                TextView resultsTitle = findViewById(R.id.resultsTitle);
-                TextView resultsURL = findViewById(R.id.articleURL);
-                AlertDialog alertDialog = new AlertDialog.Builder(SearchActivity.this).create();
-                alertDialog.setTitle("Favourite Article");
-                alertDialog.setMessage("Add article to favourites?");
-                alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "YES",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                String title = resultsTitle.getText().toString();
-                                String URL = "hello";
-
-                               try{
-                                    SQLiteDatabase nabberDB = openOrCreateDatabase("nabberDB",MODE_PRIVATE,null);
-                                    nabberDB.execSQL("CREATE TABLE IF NOT EXISTS favorites(Title, Link);");
-                                    nabberDB.execSQL("INSERT INTO favorites VALUES('2','2');");
-                                    System.out.println("Added to DB");
-                                }
-                                catch(SQLException e){
-                                    System.out.println("DB Error, please see StackTrace");
-                                    e.printStackTrace();
-                                }
-
-                            }
-                        });
-
-
-
-                alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "NO",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        });
-                alertDialog.show();
-
-
-                return true;
-            });
-
             list.setOnItemClickListener((parent, view, position, id) -> {
                 Intent gotoDetails = new Intent(SearchActivity.this, SearchResultsActivity.class);
                 gotoDetails.putExtra("article", titleList.get(position));
                 startActivity(gotoDetails);
-
-
             });
-
-
-
-
-
-
         }
-
-
-        }
-
-
-
+    }
 
         private class ResultListAdapter extends BaseAdapter {
 
@@ -282,6 +225,5 @@ public class SearchActivity extends AppCompatActivity {
                 return newView;
             }
         }
-
 
     }
