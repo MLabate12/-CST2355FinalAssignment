@@ -39,15 +39,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         String searchToast = getString(R.string.toast_1);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
 
         // using toolbar as Action
-        setSupportActionBar(toolbar);
+        setSupportActionBar(myToolbar);
 
         //start Navigation Bar
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,
-                drawer, toolbar, R.string.open, R.string.close);
+                drawer, myToolbar, R.string.open, R.string.close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
@@ -55,8 +55,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
 
         // Display application icon in the toolbar
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        /*getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);*/
 
         search = findViewById(R.id.searchQuery);
 

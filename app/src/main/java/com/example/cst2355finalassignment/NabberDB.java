@@ -61,15 +61,15 @@ public class NabberDB extends SQLiteOpenHelper {
                     + COL_SECTIONNAME + " TEXT);");
         }
 
-    public boolean addArticle(SearchResult article) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(COL_TITLE, article.getTitle());
-        values.put(COL_LINK, article.getURL());
-        values.put(COL_SECTIONNAME, article.getSectionName());
+        public boolean addArticle(SearchResult article) {
+            SQLiteDatabase db = this.getWritableDatabase();
+            ContentValues values = new ContentValues();
+            values.put(COL_TITLE, article.getTitle());
+            values.put(COL_LINK, article.getURL());
+            values.put(COL_SECTIONNAME, article.getSectionName());
 
-        return db.insert(TABLE_NAME, null, values) > 0;
-    }
+            return db.insert(TABLE_NAME, null, values) > 0;
+        }
 
         public boolean deleteArticle(SearchResult sResult) {
             SQLiteDatabase db = this.getWritableDatabase();

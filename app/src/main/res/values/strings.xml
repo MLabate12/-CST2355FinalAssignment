@@ -18,4 +18,5 @@
     <string name="favourite_deletemsg">Remove</string>
     <string name="favourite_deletesuccess">Sucessfully removed from favourites</string>
     <string name="faveRemoveButton">Remove from Favourites</string>
+    <string name="help">Help</string>
 </resources>

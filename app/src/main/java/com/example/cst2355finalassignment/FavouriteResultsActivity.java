@@ -38,16 +38,6 @@ public class FavouriteResultsActivity extends AppCompatActivity {
 
         nabberDB = new NabberDB(this);
         nabberDB.getWritableDatabase();
-        String faveRToast = getString(R.string.toast_3);
-
-        Button faveRButton = findViewById(R.id.faveRemoveButton);
-        faveRButton.setOnClickListener(click -> {
-            nabberDB.deleteArticle(article);
-
-            Toast toast= Toast.makeText(getApplicationContext(),faveRToast,Toast.LENGTH_SHORT);
-            toast.show();
-        });
-
     }
 
     @Override
