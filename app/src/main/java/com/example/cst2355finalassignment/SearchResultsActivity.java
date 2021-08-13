@@ -64,14 +64,18 @@ public class SearchResultsActivity extends AppCompatActivity {
 
         TextView title = findViewById(R.id.articleTitle);
         title.setText("Article Title: " + String.format(article.getTitle()));
-        //title.setBackgroundColor(Color.BLACK);
-        //title.setBackgroundColor(Color.WHITE);
+        title.setBackgroundColor(Color.BLACK);
+        title.setTextColor(Color.WHITE);
 
         TextView sectionName = findViewById(R.id.articleSectionName);
         sectionName.setText("Section Name: " + String.format(article.getSectionName()));
+        sectionName.setBackgroundColor(Color.BLACK);
+        sectionName.setTextColor(Color.WHITE);
 
         TextView URL = findViewById(R.id.articleURL);
         URL.setText("URL: " + String.format(article.getURL()));
+        URL.setBackgroundColor(Color.BLACK);
+        URL.setTextColor(Color.WHITE);
 
         nabberDB = new NabberDB(this);
         nabberDB.getWritableDatabase();

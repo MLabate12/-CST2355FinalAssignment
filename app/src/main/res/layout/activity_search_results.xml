@@ -10,7 +10,8 @@
             <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_margin="15dp">
 
                 <TextView
                     android:id="@+id/resultsTitle"
@@ -31,7 +32,7 @@
                 android:gravity="center"
                 android:layout_below="@id/resultsTitle"
                 android:textSize="28dp"
-                android:padding="15dp"/>
+                android:layout_marginTop="15dp"/>
 
             <TextView
                 android:id="@+id/articleSectionName"
@@ -39,7 +40,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:layout_below="@id/articleTitle"
-                android:textSize="28dp" />
+                android:textSize="28dp"
+                android:layout_marginTop="15dp"/>
 
             <TextView
                 android:id="@+id/articleURL"
@@ -48,7 +50,8 @@
                 android:gravity="center"
                 android:layout_below="@id/articleSectionName"
                 android:autoLink="web"
-                android:textSize="28dp" />
+                android:textSize="28dp"
+                android:layout_marginTop="15dp"/>
 
             <TextView
                 android:id="@+id/notFound"
