@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // using toolbar as Action
         setSupportActionBar(toolbar);
 
+
         //start Navigation Bar
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,
@@ -55,8 +56,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
 
         // Display application icon in the toolbar
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        /**getSupportActionBar().setDisplayShowHomeEnabled(false);
+        getSupportActionBar().setDisplayUseLogoEnabled(false);**/
+
+
+
 
         search = findViewById(R.id.searchQuery);
 

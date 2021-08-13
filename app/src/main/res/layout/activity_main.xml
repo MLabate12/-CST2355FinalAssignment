@@ -8,13 +8,9 @@
     tools:context=".MainActivity"
     android:background="@drawable/newspaper_background">
 
-    <androidx.appcompat.widget.Toolbar
+    <include
         android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#FFFFFF"
-        android:gravity="center"
-        app:titleTextColor="#ffff" />
+        layout="@layout/toolbar" />
 
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawer_layout"
