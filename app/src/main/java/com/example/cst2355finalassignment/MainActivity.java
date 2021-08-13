@@ -100,15 +100,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
                 alertDialogBuilder.setTitle("Help Options")
                     //What is the message:
-                    .setMessage("Would you like to go to the main Help page?")
+                    .setMessage("Go to the main Help page?")
 
-                    //what the Yes button does:
-                    .setPositiveButton("Yes", (click, arg) -> {
-                        Intent goToHelp = new Intent(MainActivity.this, HelpActivity.class);
-                        startActivity(goToHelp);
-                    })
-                    //What the No button does:
-                    .setNegativeButton("No", (click, arg) -> { })
+                        .setPositiveButton("Cancel", (click, arg) -> { })
+
+                        .setNegativeButton("YES", (click, arg) -> {
+                            Intent goToHelp = new Intent(MainActivity.this, HelpActivity.class);
+                            startActivity(goToHelp);
+                        })
 
                     //Show the dialog
                     .create().show();
