@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/newspaper_background">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -28,7 +29,11 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/favourite_header"
-                android:textSize="32dp" />
+                android:textSize="32dp"
+                android:typeface="serif"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:background="@color/black"/>
 
             <ListView
                 android:id="@+id/faveArticles"
@@ -36,7 +41,11 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:layout_alignParentBottom="false"
-                android:layout_below="@id/favTitle"/>
+                android:layout_below="@id/favTitle"
+                android:textStyle="bold"
+                android:layout_margin="25dp"
+                android:dividerHeight="5dp"
+                android:stackFromBottom="false"/>
         </RelativeLayout>
 
         <com.google.android.material.navigation.NavigationView

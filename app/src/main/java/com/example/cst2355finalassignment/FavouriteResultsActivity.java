@@ -1,6 +1,7 @@
 package com.example.cst2355finalassignment;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
@@ -29,12 +30,18 @@ public class FavouriteResultsActivity extends AppCompatActivity {
 
         TextView title = findViewById(R.id.articleTitle);
         title.setText(String.format(article.getTitle()));
+        title.setBackgroundColor(Color.BLACK);
+        title.setTextColor(Color.WHITE);
 
         TextView sectionName = findViewById(R.id.articleSectionName);
         sectionName.setText(String.format(article.getSectionName()));
+        sectionName.setBackgroundColor(Color.BLACK);
+        sectionName.setTextColor(Color.WHITE);
 
         TextView URL = findViewById(R.id.articleURL);
         URL.setText(String.format(article.getURL()));
+        URL.setBackgroundColor(Color.BLACK);
+        URL.setTextColor(Color.WHITE);
 
         nabberDB = new NabberDB(this);
         nabberDB.getWritableDatabase();

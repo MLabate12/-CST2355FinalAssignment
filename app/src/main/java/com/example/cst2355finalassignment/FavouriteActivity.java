@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -80,6 +81,8 @@ public class FavouriteActivity extends AppCompatActivity {
             newView = inflater.inflate(R.layout.row_layout, parent, false);
             tView = newView.findViewById(R.id.rowTitle);
             tView.setText(getItem(position).toString());
+            newView.setBackgroundColor(Color.BLACK);
+            tView.setTextColor(Color.WHITE);
             return newView;
         }
     }
@@ -98,11 +101,6 @@ public class FavouriteActivity extends AppCompatActivity {
             list.setOnItemClickListener((parent, view, position, id) -> {
                 Bundle dataToPass = new Bundle();
                 dataToPass.putSerializable("article", faveList.get(position));
-
-
-                /*Intent nextActivity = new Intent(FavouriteActivity.this, EmptyActivity.class);
-                nextActivity.putExtras(dataToPass);
-                startActivity(nextActivity);*/
             });
 
             list.setOnItemLongClickListener((parent, view, position, id) -> {

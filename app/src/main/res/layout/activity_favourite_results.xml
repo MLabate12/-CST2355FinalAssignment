@@ -4,19 +4,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/newspaper_background">
 
             <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_margin="15dp">
+
+                <TextView
+                    android:id="@+id/resultsTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/details_title"
+                    android:textSize="32dp"
+                    android:typeface="serif"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:background="@color/black"/>
 
             <TextView
                 android:id="@+id/articleTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textSize="28dp" />
+                android:layout_below="@id/resultsTitle"
+                android:textSize="28dp"
+                android:layout_marginTop="15dp"/>
 
             <TextView
                 android:id="@+id/articleSectionName"
@@ -24,7 +40,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:layout_below="@id/articleTitle"
-                android:textSize="28dp" />
+                android:textSize="28dp"
+                android:layout_marginTop="15dp"/>
 
             <TextView
                 android:id="@+id/articleURL"
@@ -33,7 +50,8 @@
                 android:gravity="center"
                 android:layout_below="@id/articleSectionName"
                 android:autoLink="web"
-                android:textSize="28dp" />
+                android:textSize="28dp"
+                android:layout_marginTop="15dp"/>
 
             <TextView
                 android:id="@+id/notFound"
@@ -43,7 +61,8 @@
                 android:visibility="invisible"
                 android:layout_below="@id/articleTitle"
                 android:text="@string/results_notfound"
-                android:textSize="24dp" />
+                android:textSize="24dp"
+                android:layout_marginTop="15dp"/>
 
         </RelativeLayout>
 

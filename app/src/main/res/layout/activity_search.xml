@@ -20,11 +20,11 @@
                 android:layout_height="wrap_content" />
 
             <TextView
-                android:id="@+id/detailsTitle"
+                android:id="@+id/resultsTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="@string/details_title"
+                android:text="@string/results_title"
                 android:textSize="32dp"
                 android:typeface="serif"
                 android:textStyle="bold"
