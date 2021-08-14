@@ -40,9 +40,9 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="350dp"
+                android:layout_marginTop="35dp"
                 android:background="#FFFFFF"
-                android:text="To access the news, enter it in the search bar. Then click enter./Pour accéder à l'actualité, saisissez-la dans la barre de recherche. Cliquez ensuite sur entrer."
+                android:text="@string/mainHelp"
                 android:textColor="@color/black"
                 android:textSize="20dp" />
 

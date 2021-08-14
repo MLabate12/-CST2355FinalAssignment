@@ -22,5 +22,10 @@
     <string name="help">Help</string>
     <string name="help_message_title">Go to help page?</string>
     <string name="help_message">Go to the main help page?</string>
-    <string name="instructions">To access the news, enter it in the search bar. Then click enter.</string>
+    <string name="devUpdate">Last updated Aug 13, 2021</string>
+    <string name="yes">Yes</string>
+    <string name="cancel">Cancel</string>
+    <string name="searchHelp">Viewing a list of your search results. Go back for a new search</string>
+    <string name="resultHelp">Viewing details of a search result. Go back view full list.</string>
+    <string name="mainHelp">To access the news, enter it in the search bar. Then click enter</string>
 </resources>

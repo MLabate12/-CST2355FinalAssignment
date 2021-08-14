@@ -264,7 +264,7 @@ public class SearchActivity extends AppCompatActivity implements NavigationView.
         {
             //what to do when the menu item is selected:
             case R.id.help_item:
-                message = "HELP GOES HERE";
+                message = getString(R.string.searchHelp);
                 break;
         }
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();

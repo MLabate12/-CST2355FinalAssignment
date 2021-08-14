@@ -48,7 +48,8 @@
                 android:textColor="#ffffff"
                 android:textColorHint="#ffffff"
                 android:textFontWeight="@integer/material_motion_duration_medium_1"
-                android:textSize="30dp" />
+                android:textSize="30dp"
+                android:inputType="text"/>
 
             <Button
                 android:id="@+id/launchButton"

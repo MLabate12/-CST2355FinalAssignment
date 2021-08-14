@@ -124,7 +124,7 @@ public class SearchResultsActivity extends AppCompatActivity implements Navigati
         {
             //what to do when the menu item is selected:
             case R.id.help_item:
-                message = "HELP GOES HERE";
+                message = getString(R.string.resultHelp);
                 break;
         }
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
@@ -139,7 +139,7 @@ public class SearchResultsActivity extends AppCompatActivity implements Navigati
         switch(item.getItemId())
         {
             case R.id.homePage:
-                Intent goToHome = new Intent(SearchResultsActivity.this, HelpActivity.class);
+                Intent goToHome = new Intent(SearchResultsActivity.this, MainActivity.class);
                 startActivity(goToHome);
                 break;
             case R.id.favePage:

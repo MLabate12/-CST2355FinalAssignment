@@ -69,7 +69,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         Fragment fragment = new UpdateFragment();
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_frame, fragment, fragment.getClass().getSimpleName()).addToBackStack(null).commit();
+        getSupportFragmentManager().beginTransaction().replace
+                (R.id.fragment_frame, fragment, fragment.getClass()
+                        .getSimpleName()).addToBackStack(null).commit();
 
         Button launchButton = findViewById(R.id.launchButton);
         launchButton.setOnClickListener(click -> {
@@ -102,9 +104,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     //What is the message:
                     .setMessage(R.string.help_message)
 
-                        .setPositiveButton("Cancel/Cancelez", (click, arg) -> { })
+                        .setPositiveButton(R.string.cancel, (click, arg) -> { })
 
-                        .setNegativeButton("YES/OUI", (click, arg) -> {
+                        .setNegativeButton(R.string.yes, (click, arg) -> {
                             Intent goToHelp = new Intent(MainActivity.this, HelpActivity.class);
                             startActivity(goToHelp);
                         })
