@@ -279,7 +279,7 @@ public class SearchActivity extends AppCompatActivity implements NavigationView.
         switch(item.getItemId())
         {
             case R.id.homePage:
-                Intent goToHome = new Intent(SearchActivity.this, HelpActivity.class);
+                Intent goToHome = new Intent(SearchActivity.this, MainActivity.class);
                 startActivity(goToHome);
                 break;
             case R.id.favePage:

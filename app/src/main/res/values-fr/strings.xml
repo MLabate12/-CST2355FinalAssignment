@@ -20,4 +20,7 @@
     <string name="favourite_deletesuccess">Supprimé avec succès des favoris</string>
     <string name="faveRemoveButton">Supprimer le Favori</string>
     <string name="help">Aide</string>
+    <string name="help_message_title">Allez a aide page?</string>
+    <string name="help_message">Accéder à la page d\'aide principale?</string>
+    <string name="instructions">Pour accéder à l\'actualité, saisissez-la dans la barre de recherche. Cliquez ensuite sur entrer.</string>
 </resources>

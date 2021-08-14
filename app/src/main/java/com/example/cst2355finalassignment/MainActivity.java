@@ -98,13 +98,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             //what to do when the menu item is selected:
             case R.id.help_item:
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-                alertDialogBuilder.setTitle("Help Options")
+                alertDialogBuilder.setTitle(R.string.help_message_title)
                     //What is the message:
-                    .setMessage("Go to the main Help page?")
+                    .setMessage(R.string.help_message)
 
-                        .setPositiveButton("Cancel", (click, arg) -> { })
+                        .setPositiveButton("Cancel/Cancelez", (click, arg) -> { })
 
-                        .setNegativeButton("YES", (click, arg) -> {
+                        .setNegativeButton("YES/OUI", (click, arg) -> {
                             Intent goToHelp = new Intent(MainActivity.this, HelpActivity.class);
                             startActivity(goToHelp);
                         })

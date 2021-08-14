@@ -171,7 +171,7 @@ public class FavouriteActivity extends AppCompatActivity implements NavigationVi
         {
             //what to do when the menu item is selected:
             case R.id.help_item:
-                message = "HELP GOES HERE";
+                message = "To delete press on the item you want to delete./Pour supprimer, appuyez sur l'élément que vous souhaitez supprimer.";
                 break;
         }
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();

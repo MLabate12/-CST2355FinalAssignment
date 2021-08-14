@@ -10,11 +10,11 @@
         android:layout_height="40dp"></FrameLayout>
 
 
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="688dp"
+    <TextView
         android:background="@color/white"
-        android:textColor="@color/white" />
-
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:text="@string/instructions"
+        android:textSize="30dp"/>
 
 </LinearLayout>

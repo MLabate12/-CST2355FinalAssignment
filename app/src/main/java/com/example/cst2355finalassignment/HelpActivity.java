@@ -70,7 +70,7 @@ public class HelpActivity extends AppCompatActivity implements NavigationView.On
         {
             //what to do when the menu item is selected:
             case R.id.help_item:
-                message = "HELP GOES HERE";
+                message = "To access the news, enter it in the search bar. Then click enter./Pour accéder à l'actualité, saisissez-la dans la barre de recherche. Cliquez ensuite sur entrer.";
                 break;
         }
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
@@ -85,7 +85,7 @@ public class HelpActivity extends AppCompatActivity implements NavigationView.On
         switch(item.getItemId())
         {
             case R.id.homePage:
-                Intent goToHome = new Intent(HelpActivity.this, HelpActivity.class);
+                Intent goToHome = new Intent(HelpActivity.this, MainActivity.class);
                 startActivity(goToHome);
                 break;
             case R.id.favePage:
